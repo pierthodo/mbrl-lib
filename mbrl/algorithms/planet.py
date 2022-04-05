@@ -83,8 +83,15 @@ def train(
         agent_uses_low_dim_obs=False,
     )
 
+    
+    obs_shape = env.observation_space.shape
+    act_shape = env.action_space.shape
+
     # Create PlaNet model
     cfg.dynamics_model.action_size = env.action_space.shape[0]
+    cfg.dynamics_model.in_size = obs_shape[0] + act_shape[0]
+    cfg.dynamics_Model.out_size = obs_shape[0] + int(cfg.algorithm.learned_rewards)
+
     planet = hydra.utils.instantiate(cfg.dynamics_model)
     assert isinstance(planet, mbrl.models.PlaNetModel)
     model_env = ModelEnv(env, planet, no_termination, generator=rng)
