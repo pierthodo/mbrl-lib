@@ -90,6 +90,7 @@ def train(
     # Create PlaNet model
     cfg.dynamics_model.action_size = env.action_space.shape[0]
     cfg.dynamics_model.in_size = obs_shape[0] + act_shape[0]
+    cfg.algorithm.learned_rewards = True
     cfg.dynamics_Model.out_size = obs_shape[0] + int(cfg.algorithm.learned_rewards)
 
     planet = hydra.utils.instantiate(cfg.dynamics_model)
