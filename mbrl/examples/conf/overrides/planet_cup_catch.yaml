@@ -34,3 +34,5 @@ cem_elite_ratio: 0.1
 cem_population_size: 1000
 cem_alpha: 0.0
 cem_clipped_normal: true
+
+num_steps: 2000
