@@ -11,6 +11,7 @@ import hydra
 import numpy as np
 import omegaconf
 import torch
+import time
 
 import mbrl.constants
 from mbrl.env.termination_fns import no_termination
@@ -134,6 +135,8 @@ def train(
     step = replay_buffer.num_stored
     total_rewards = 0.0
     for episode in range(cfg.algorithm.num_episodes):
+        t0 = time.time()
+        print("Episode number",episode,"/",cfg.algorithm.num_episodes)
         # Train the model for one epoch of `num_grad_updates`
         dataset, _ = get_sequence_buffer_iterator(
             replay_buffer,
@@ -184,6 +187,7 @@ def train(
                 "env_step": step,
             },
         )
+        print("Time for an episode: ",time.time()-t0)
 
     # returns average episode reward (e.g., to use for tuning learning curves)
     return total_rewards / cfg.algorithm.num_episodes
