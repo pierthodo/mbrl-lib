@@ -6,7 +6,7 @@ __version__ = "0.2.0.dev4"
 from gym.envs.registration import register
 
 register(
-    id='mbrl/CartPole-v0',
+    id='continuous_CartPole-v0',
     entry_point='mbrl.env:CartPoleEnv',
     max_episode_steps=200,
 )
