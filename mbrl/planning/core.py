@@ -123,7 +123,7 @@ def complete_agent_cfg(
     return agent_cfg
 
 
-def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env) -> Agent:
+def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env, device: str) -> Agent:
     """Loads an agent from a Hydra config file at the given path.
 
     For agent of type "pytorch_sac.agent.sac.SACAgent", the directory
@@ -143,7 +143,7 @@ def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env) -> Agent:
     """
     agent_path = pathlib.Path(agent_path)
     cfg = omegaconf.OmegaConf.load(agent_path / ".hydra" / "config.yaml")
-
+    cfg["device"] = device
     if cfg.algorithm.agent._target_ == "mbrl.third_party.pytorch_sac_pranz24.sac.SAC":
         import mbrl.third_party.pytorch_sac_pranz24 as pytorch_sac
 
