@@ -151,6 +151,8 @@ def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env, device: str) 
         from .sac_wrapper import SACAgent
 
         complete_agent_cfg(env, cfg.algorithm.agent)
+        print(cfg.algorithm.agent)
+
         agent: pytorch_sac.SAC = hydra.utils.instantiate(cfg.algorithm.agent)
         agent.load_checkpoint(ckpt_path=agent_path / "sac.pth")
         return SACAgent(agent)
