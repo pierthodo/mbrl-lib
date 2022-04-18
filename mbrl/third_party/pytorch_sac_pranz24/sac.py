@@ -194,8 +194,8 @@ class SAC(object):
     def load_checkpoint(self, ckpt_path, evaluate=False,device="cpu"):
         print("Loading models from {}".format(ckpt_path))
         if ckpt_path is not None:
-            checkpoint = torch.load(ckpt_path)
-            self.policy.load_state_dict(checkpoint["policy_state_dict"],map_location=torch.device(device))
+            checkpoint = torch.load(ckpt_path,map_location=torch.device(device))
+            self.policy.load_state_dict(checkpoint["policy_state_dict"])
             self.critic.load_state_dict(checkpoint["critic_state_dict"])
             self.critic_target.load_state_dict(checkpoint["critic_target_state_dict"])
             self.critic_optim.load_state_dict(checkpoint["critic_optimizer_state_dict"])
