@@ -153,7 +153,7 @@ def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env, device: str) 
         cfg.algorithm.agent.args["device"] = device
 
         agent: pytorch_sac.SAC = hydra.utils.instantiate(cfg.algorithm.agent)
-        agent.load_checkpoint(ckpt_path=agent_path / "sac.pth")
+        agent.load_checkpoint(ckpt_path=agent_path / "sac.pth",device=device)
         return SACAgent(agent)
     else:
         raise ValueError("Invalid agent configuration.")
