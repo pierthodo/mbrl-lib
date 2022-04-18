@@ -151,7 +151,7 @@ def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env, device: str) 
         from .sac_wrapper import SACAgent
 
         complete_agent_cfg(env, cfg.algorithm.agent)
-        cfg.algorithm.agent.device = device
+        cfg.algorithm.agent["device"] = device
         print(cfg.algorithm.agent)
 
         agent: pytorch_sac.SAC = hydra.utils.instantiate(cfg.algorithm.agent)
