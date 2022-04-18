@@ -144,7 +144,6 @@ def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env, device: str) 
     agent_path = pathlib.Path(agent_path)
     cfg = omegaconf.OmegaConf.load(agent_path / ".hydra" / "config.yaml")
     cfg["device"] = device
-    print(cfg.algorithm.agent)
     if cfg.algorithm.agent._target_ == "mbrl.third_party.pytorch_sac_pranz24.sac.SAC":
         import mbrl.third_party.pytorch_sac_pranz24 as pytorch_sac
 
@@ -152,7 +151,6 @@ def load_agent(agent_path: Union[str, pathlib.Path], env: gym.Env, device: str) 
 
         complete_agent_cfg(env, cfg.algorithm.agent)
         cfg.algorithm.agent.args["device"] = device
-        print(cfg.algorithm.agent)
 
         agent: pytorch_sac.SAC = hydra.utils.instantiate(cfg.algorithm.agent)
         agent.load_checkpoint(ckpt_path=agent_path / "sac.pth")
