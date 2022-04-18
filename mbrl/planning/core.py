@@ -10,7 +10,7 @@ import gym
 import hydra
 import numpy as np
 import omegaconf
-
+import torch
 import mbrl.models
 import mbrl.types
 
